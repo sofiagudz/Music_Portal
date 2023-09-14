@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Music_Portal.Models.Song>
+
+@{
+	ViewBag.Title = "SongsToList";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model != null)
+{
+	@foreach (var t in Model)
+	{
+		<div style="background-color:#374566; border-radius: 15px; box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1),
+    0.3em 0.3em 1em black;">
+		<p class="font" style="font-size: 36px; text-align:center; text-shadow: 1px 1px 2px grey; color:white; margin-top: 10px;">@Html.DisplayFor(modelItem=>t.Name)</p>
+		<table>
+			<tr>
+				<td>
+					<div style="text-align: center">
+						<video controls width="700" style="margin: 40px">
+							<source src="@Url.Content(t.Video)" type="video/mp4">
+						</video>
+					</div>
+				</td>
+				<td>
+					<div>
+						<table>
+							<tr>
+								<td class="font"style="font-size: 22px; color:white">Исполнитель: &nbsp;@Html.DisplayFor(modelItem=>t.Singer.Name)</td>
+							</tr>
+							<tr>
+								<td class="font"style="font-size: 22px; color:white">Год: &nbsp;@Html.DisplayFor(modelItem=>t.ReleaseYear)</td>
+							</tr>
+							<tr>
+								<td class="font"style="font-size: 22px; color:white">Альбом: &nbsp;@Html.DisplayFor(modelItem=>t.Album)</td>
+							</tr>
+							<tr>
+								<td class="font"style="font-size: 22px; color:white">Стиль: &nbsp;@Html.DisplayFor(modelItem=>t.Style.Name)</td>
+							</tr>
+							<tr>
+								<td class="font"style="font-size: 22px; color:white">Разместил: &nbsp;@Html.DisplayFor(modelItem=>t.Publisher.Login)</td>
+							</tr>
+						</table>
+						<a asp-action="EditSong" asp-route-id="@t.Id" style="color: #b4b5b8; font-size: 20px;" class="font">Редактировать</a>&nbsp; &nbsp;
+                        <a asp-action="DeleteSong" asp-route-id="@t.Id" style="color: #b4b5b8; font-size: 20px;" class="font">Удалить</a>
+					</div>
+				</td>
+			</tr>
+		</table>
+		</div>
+		<br />
+	}
+}

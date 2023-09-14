@@ -1,0 +1,56 @@
+﻿@model Music_Portal.Models.User
+
+@{
+    ViewBag.Title = "DeleteUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div style="background-color: #374566; box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1), 0.3em 0.3em 1em black; border-radius: 15px; width: 500px">
+<p class="font" style="font-size: 32px; color: white; padding-top: 30px; text-align: center">Удаление пользователя</p>
+<hr style="color: white"/>
+<p class="font" style="font-size: 20px; color: white; text-align: center">Вы уверены что хотите удалить этого пользователя?</p>
+<div>
+    <hr />
+    <dl class="row"  style="margin: 20px; margin-left: 30px; width: 450px">
+        <dt class = "col-sm-2" style="color: white; width: 75px" class="font">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10" style="color: white" class="font">
+            &nbsp;&nbsp;&nbsp;&nbsp;@Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2" style="color: white; width: 75px" class="font">
+            @Html.DisplayNameFor(model => model.Surname)
+        </dt>
+        <dd class = "col-sm-10" style="color: white" class="font">
+            &nbsp;&nbsp;&nbsp;&nbsp;@Html.DisplayFor(model => model.Surname)
+        </dd>
+        <dt class = "col-sm-2" style="color: white; width: 75px" class="font">
+            @Html.DisplayNameFor(model => model.Login)
+        </dt>
+        <dd class = "col-sm-10" style="color: white" class="font">
+            &nbsp;&nbsp;&nbsp;&nbsp;@Html.DisplayFor(model => model.Login)
+        </dd>
+        <dt class = "col-sm-2" style="color: white; width: 120px" class="font">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class = "col-sm-10" style="color: white; width: 275px" class="font">
+            &nbsp;&nbsp;&nbsp;&nbsp;@Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class = "col-sm-2" style="color: white; width: 75px" class="font">
+            @Html.DisplayNameFor(model => model.AccessLevel)
+        </dt>
+        <dd class = "col-sm-10" style="color: white" class="font">
+            &nbsp;&nbsp;&nbsp;&nbsp;@Html.DisplayFor(model => model.AccessLevel)
+        </dd>
+    </dl>
+    <br />
+    <form asp-action="Delete" style="margin-left: 200px">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Удалить" class="btn btn-danger" />
+    </form>
+    <br />
+</div>
+</div>
+<br />
+<div>
+    <a asp-action="UsersList"style="text-decoration:none; color: black">&lt;&lt;НАЗАД К СПИСКУ</a>
+</div>

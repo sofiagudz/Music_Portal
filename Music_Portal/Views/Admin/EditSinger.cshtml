@@ -1,0 +1,40 @@
+﻿@model Music_Portal.Models.Singer
+
+@{
+    ViewBag.Title = "EditSinger";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="background-color: #374566; box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1), 0.3em 0.3em 1em black; border-radius: 15px; width: 500px">
+    <p class="font" style="font-size: 32px; color: white; padding-top: 30px; text-align: center">Редактирование исполнителя</p>
+    <hr style="color:white"/>
+    <br />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditSinger"  style="width: 350px; margin-left: 75px">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label" style="color: white" class="font"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group" style="margin-left: 125px">
+                <input type="submit" value="Сохранить" class="btn btn-primary" />
+            </div>
+        </form>
+        <br />
+    </div>
+</div>
+</div>
+<br />
+<div>
+    <a asp-action="SingersToList"style="text-decoration:none; color: #133abd">&lt;&lt;НАЗАД К СПИСКУ</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

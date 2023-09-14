@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Music_Portal.Models.Singer>
+
+@{
+    ViewBag.Title = "SingersToList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <p class="font" style="font-size: 32px; padding-top: 33px;">Исполнители</p>
+    <a asp-action="AddSinger">Добавить исполнителя</a>
+    <br />
+    <div style="background-color: #374566; box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1), 0.3em 0.3em 1em black; border-radius: 15px;">
+        <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th style="color: white" class="font">@Html.DisplayNameFor(model=>model.Name)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                @foreach (var t in Model)
+                {
+                   <tr>
+                       <td style="color: white" class="font">@Html.DisplayFor(modelItem=>t.Name)</td>
+                       <td>
+                           <a asp-action="EditSinger" asp-route-id="@t.Id">Редактировать</a>
+                           <a asp-action="DeleteSinger" asp-route-id="@t.Id">Удалить</a>
+                       </td>
+                   </tr> 
+                }
+            }
+        </tbody>
+    </table>
+    <br />
+    </div>
+</div>
+

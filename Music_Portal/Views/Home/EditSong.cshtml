@@ -1,0 +1,72 @@
+﻿@model Music_Portal.Models.Song
+
+@{
+    ViewBag.Title = "EditSong";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (this.Context.Session.GetString("Login") == null || this.Context.Session.GetString("Login") != "admin")
+{
+    <div class="font" style="font-size: 22px; color:#c4401f">
+        <b>Для редактирования песни нужны права администратора!</b>
+    </div>
+}
+else
+{
+    <div style="background-color: #374566; box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1), 0.3em 0.3em 1em black; border-radius: 15px; width: 500px">
+<p class="font" style="font-size: 32px; color: white; padding-top: 30px; text-align: center">Редактирование песни</p>
+<div class="row">
+    <div class="col-md-4" style="width: 500px;">
+        <form asp-action="EditSong" enctype="multipart/form-data" style="margin: 20px; margin-left: 50px">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Publisher" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label" style="color: white"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Album" class="control-label" style="color: white"></label>
+                <input asp-for="Album" class="form-control" />
+                <span asp-validation-for="Album" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReleaseYear" class="control-label" style="color: white"></label>
+                <input asp-for="ReleaseYear" class="form-control" />
+                <span asp-validation-for="ReleaseYear" class="text-danger"></span>
+            </div>
+            <br />
+            <div>
+                 <input type="file" name="uploadedVideo"  style="color: white"/><br>
+            </div>
+            <div class="form-group">
+                <label asp-for="Style" class="control-label" style="color: white"></label>
+                <select asp-for="StyleId" class="form-control" asp-items="ViewBag.StyleId"></select>
+                <a class="nav-link" style="color: white;text-decoration: underline" class="font" asp-area="" asp-controller="Admin" asp-action="AddStyle">Добавить стиль</a>
+            </div>
+            <div class="form-group">
+                <label asp-for="Singer" class="control-label" style="color: white"></label>
+                <select asp-for="SingerId" class="form-control" asp-items="ViewBag.SingerId"></select>
+                <a class="nav-link" style="color: white;text-decoration: underline" class="font" asp-area="" asp-controller="Admin" asp-action="AddSinger">Добавить исполнителя</a>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Сохранить" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+}
+<br />
+<div>
+    <a asp-action="Index"style="text-decoration:none; color: #133abd;">&lt;&lt;НАЗАД К СПИСКУ</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

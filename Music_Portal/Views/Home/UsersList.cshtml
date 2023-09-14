@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Music_Portal.Models.User>
+
+@{
+	ViewBag.Title = "UsersToList";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<p class="font" style="font-size: 32px; padding-top: 33px;">Список участников</p>
+<br />
+<div style="background-color: #374566; box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1), 0.3em 0.3em 1em black; border-radius: 15px;">
+	<br />
+	<table class="table" >
+		<thead style="margin-top: 20px">
+			<tr>
+				<th style="color: white" class="font">
+					@Html.DisplayNameFor(model=>model.Name)
+				</th>
+				<th style="color: white" class="font">
+				    @Html.DisplayNameFor(model=>model.Surname)
+				</th>
+				<th style="color: white" class="font">
+				    @Html.DisplayNameFor(model=>model.Login)
+				</th>
+				<th style="color: white" class="font">
+				    @Html.DisplayNameFor(model=>model.Email)
+				</th>
+				<th style="color: white" class="font">
+				    @Html.DisplayNameFor(model=>model.AccessLevel)
+				</th>
+			</tr>
+		</thead>
+		<tbody sty>
+		@if (Model != null)
+		{
+			@foreach (var t in Model)
+			{
+				<tr>
+					<td style="color: white" class="font">
+						@Html.DisplayFor(modelItem=>t.Name)
+					</td>
+					<td style="color: white" class="font">
+						@Html.DisplayFor(modelItem=>t.Surname)
+					</td>
+					<td style="color: white" class="font">
+						@Html.DisplayFor(modelItem=>t.Login)
+					</td>
+					<td style="color: white" class="font">
+						@Html.DisplayFor(modelItem=>t.Email)
+					</td>
+					<td style="color: white" class="font">
+						@Html.DisplayFor(modelItem=>t.AccessLevel)
+					</td>
+					<td>
+						<a asp-action="Edit" asp-route-id="@t.Id">Редактировать</a>
+						<a asp-action="Delete" asp-route-id="@t.Id">Удалить</a>
+					</td>
+				</tr>
+			}
+		}
+	</tbody>
+	</table>
+	<br />
+</div>
