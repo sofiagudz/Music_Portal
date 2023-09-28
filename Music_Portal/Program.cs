@@ -14,6 +14,12 @@ string? connection = builder.Configuration.GetConnectionString("DefaultConnectio
 builder.Services.AddDbContext<Music_PortalContext>(options => options.UseSqlServer(connection));
 
 builder.Services.AddScoped<IRepository, Music_PortalRepository>();
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(10);
+    options.Cookie.Name = "Session";
+});
 
 var app = builder.Build();
 

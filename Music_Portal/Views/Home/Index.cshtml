@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Music_Portal.Models.Song>
 
 @{
-	ViewBag.Title = "SongsToList";
+	ViewBag.Title = @Music_Portal.Resources.Resource.SongsToList;
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -25,23 +25,23 @@
 					<div>
 						<table>
 							<tr>
-								<td class="font"style="font-size: 22px; color:white">Исполнитель: &nbsp;@Html.DisplayFor(modelItem=>t.Singer.Name)</td>
+								<td class="font"style="font-size: 22px; color:white">@Music_Portal.Resources.Resource.Singer: &nbsp;@Html.DisplayFor(modelItem=>t.Singer.Name)</td>
 							</tr>
 							<tr>
-								<td class="font"style="font-size: 22px; color:white">Год: &nbsp;@Html.DisplayFor(modelItem=>t.ReleaseYear)</td>
+								<td class="font"style="font-size: 22px; color:white">@Music_Portal.Resources.Resource.Year: &nbsp;@Html.DisplayFor(modelItem=>t.ReleaseYear)</td>
 							</tr>
 							<tr>
-								<td class="font"style="font-size: 22px; color:white">Альбом: &nbsp;@Html.DisplayFor(modelItem=>t.Album)</td>
+								<td class="font"style="font-size: 22px; color:white">@Music_Portal.Resources.Resource.Album: &nbsp;@Html.DisplayFor(modelItem=>t.Album)</td>
 							</tr>
 							<tr>
-								<td class="font"style="font-size: 22px; color:white">Стиль: &nbsp;@Html.DisplayFor(modelItem=>t.Style.Name)</td>
+								<td class="font"style="font-size: 22px; color:white">@Music_Portal.Resources.Resource.Style: &nbsp;@Html.DisplayFor(modelItem=>t.Style.Name)</td>
 							</tr>
 							<tr>
-								<td class="font"style="font-size: 22px; color:white">Разместил: &nbsp;@Html.DisplayFor(modelItem=>t.Publisher.Login)</td>
+								<td class="font"style="font-size: 22px; color:white">@Music_Portal.Resources.Resource.Published: &nbsp;@Html.DisplayFor(modelItem=>t.Publisher.Login)</td>
 							</tr>
 						</table>
-						<a asp-action="EditSong" asp-route-id="@t.Id" style="color: #b4b5b8; font-size: 20px;" class="font">Редактировать</a>&nbsp; &nbsp;
-                        <a asp-action="DeleteSong" asp-route-id="@t.Id" style="color: #b4b5b8; font-size: 20px;" class="font">Удалить</a>
+						<a asp-action="EditSong" asp-route-id="@t.Id" style="color: #b4b5b8; font-size: 20px;" class="font">@Music_Portal.Resources.Resource.Edit</a>&nbsp; &nbsp;
+                        <a asp-action="DeleteSong" asp-route-id="@t.Id" style="color: #b4b5b8; font-size: 20px;" class="font">@Music_Portal.Resources.Resource.Delete</a>
 					</div>
 				</td>
 			</tr>

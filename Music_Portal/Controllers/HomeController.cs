@@ -1,13 +1,13 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Music_Portal.Filters;
 using Music_Portal.Models;
 using Music_Portal.Repository;
-using System.Diagnostics;
 
 namespace Music_Portal.Controllers
 {
+    [Culture]
     public class HomeController : Controller
     {
         IRepository repo;
@@ -306,5 +306,22 @@ namespace Music_Portal.Controllers
                 View(await repo.UsersToListIEnumerable()) :
                 Problem("Entity set 'Music_PortalContext.Users' is null");
 		}
-	}
+
+        public ActionResult ChangeCulture(string lang)
+        {
+            string? returnUrl = HttpContext.Session.GetString("path") ?? "/Home/Index";
+
+            // Список культур
+            List<string> cultures = new List<string>() { "ru", "en", "uk"/*, "de", "fr" */};
+            if (!cultures.Contains(lang))
+            {
+                lang = "ru";
+            }
+
+            CookieOptions option = new CookieOptions();
+            option.Expires = DateTime.Now.AddDays(10); // срок хранения куки - 10 дней
+            Response.Cookies.Append("lang", lang, option); // создание куки
+            return Redirect(returnUrl);
+        }
+    }
 }

@@ -27,7 +27,7 @@ namespace Music_Portal.Controllers
             {
                 await repo.AddStyle(style);
                 await repo.Save();
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction(nameof(StylesToList));
             }
             catch (Exception)
             {

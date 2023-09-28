@@ -6,29 +6,34 @@ namespace Music_Portal.Models
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Поле является обязательным!")]
-        [Display(Name = "Имя")]
+        [Required(ErrorMessageResourceType = typeof(Resources.Resource), 
+            ErrorMessageResourceName = "Required")]
+        [Display(Name = "NameU", ResourceType = typeof(Resources.Resource))]
         public string? Name { get; set; }
 
-        [Required(ErrorMessage = "Поле является обязательным!")]
-        [Display(Name = "Фамилия")]
+        [Required(ErrorMessageResourceType = typeof(Resources.Resource),
+            ErrorMessageResourceName = "Required")]
+        [Display(Name = "Surname", ResourceType = typeof(Resources.Resource))]
         public string? Surname { get; set; }
 
-        [Required(ErrorMessage = "Поле является обязательным!")]
-        [Display(Name = "Логин")]
+        [Required(ErrorMessageResourceType = typeof(Resources.Resource),
+            ErrorMessageResourceName = "Required")]
+        [Display(Name = "Lgn", ResourceType = typeof(Resources.Resource))]
         public string? Login { get; set; }
 
-        [Required(ErrorMessage = "Поле является обязательным!")]
-        [Display(Name = "Электронный адрес")]
+        [Required(ErrorMessageResourceType = typeof(Resources.Resource),
+            ErrorMessageResourceName = "Required")]
+        [Display(Name = "Email", ResourceType = typeof(Resources.Resource))]
         [DataType(DataType.EmailAddress)]
         public string? Email { get; set; }
 
-        [Required(ErrorMessage = "Поле должно быть установлено")]
-        [Display(Name = "Пароль")]
+        [Required(ErrorMessageResourceType = typeof(Resources.Resource),
+            ErrorMessageResourceName = "Required")]
+        [Display(Name = "Password", ResourceType = typeof(Resources.Resource))]
         [DataType(DataType.Password)]
         public string? Password { get; set; }
 
-        [Display(Name = "Уровень доступа")]
+        [Display(Name = "AccessLevel", ResourceType = typeof(Resources.Resource))]
         public int? AccessLevel { get; set; }
 
         public virtual ICollection<Song> Songs { get; set; }

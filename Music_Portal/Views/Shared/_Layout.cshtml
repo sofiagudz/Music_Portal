@@ -20,41 +20,57 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     @if(Context.Session.GetString("Login") == null)
                     {
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Login">Вход</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Registration">Регистрация</a>
-                        </li>
-                    </ul>
+                    @* <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item"> *@
+                            @Html.ActionLink(@Music_Portal.Resources.Resource.Login, "Login", "Home", null, new {@class = "navbar-brand"})
+                            
+                            @* <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Login">Вход</a> *@
+                        @* </li>
+                        <li class="nav-item"> *@
+                            @Html.ActionLink(@Music_Portal.Resources.Resource.Registration, "Registration", "Home", null, new {@class = "navbar-brand"})
+                            @* <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Registration">Регистрация</a> *@
+                        @* </li>
+                        <li class="nav-item"> *@
+                            @using(Html.BeginForm("ChangeCulture", "Home")){
+                                <select name="lang" class="form-control">
+                                    <option value="ru">Русский</option>
+                                    <option value="uk">Українська</option>
+                                    <option value="en">English</option>
+                                </select>
+                                <input type="submit" name="submit" value="@Music_Portal.Resources.Resource.ChooseLang" class="btn btn-default"/>
+                            }
+
+                        @* </li>
+                    </ul> *@
                     }
                     else{
                         if (Context.Session.GetString("Login") == "admin")
                         {
                         <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AddSong">Добавить песню</a>
+                           @Html.ActionLink(@Music_Portal.Resources.Resource.AddSong, "AddSong", "Home", null, new {@class = "navbar-brand"})
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="UsersList">Все участники</a>
+                            @Html.ActionLink(@Music_Portal.Resources.Resource.AllUsers, "UsersList", "Home", null, new {@class = "navbar-brand"})
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="StylesToList">Стили</a>
+                            @Html.ActionLink(@Music_Portal.Resources.Resource.Styles, "StylesToList", "Admin", null, new {@class = "navbar-brand"})
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="SingersToList">Исполнители</a>
+                            @Html.ActionLink(@Music_Portal.Resources.Resource.Singers, "SingersToList", "Admin", null, new {@class = "navbar-brand"})
                         </li>
                         </ul>
-                            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Logout">@Context.Session.GetString("Login")  Выход</a>
+                            @Context.Session.GetString("Login")
+                            @Html.ActionLink(@Music_Portal.Resources.Resource.Exit, "Logout", "Home", null, new {@class = "navbar-brand"})
                         }
                         else{
                         <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AddSong">Добавить песню</a>
+                            @Html.ActionLink(@Music_Portal.Resources.Resource.AddSong, "AddSong", "Home", null, new {@class = "navbar-brand"})
                         </li>
                         </ul>
-                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Logout">@Context.Session.GetString("Login")  Выход</a>
+                            @Context.Session.GetString("Login")
+                            @Html.ActionLink(@Music_Portal.Resources.Resource.Exit, "Logout", "Home", null, new {@class = "navbar-brand"})
                         }
                     }
                 </div>

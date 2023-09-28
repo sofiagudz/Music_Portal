@@ -6,8 +6,9 @@ namespace Music_Portal.Models
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Поле является обязательным!")]
-        [Display(Name = "Название")]
+        [Required(ErrorMessageResourceType = typeof(Resources.Resource),
+            ErrorMessageResourceName = "Required")]
+        [Display(Name = "Name", ResourceType = typeof(Resources.Resource))]
         public string? Name { get; set; }
     }
 }

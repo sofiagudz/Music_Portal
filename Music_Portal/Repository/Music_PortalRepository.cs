@@ -118,7 +118,7 @@ namespace Music_Portal.Repository
 			return await _context.Users.FirstOrDefaultAsync(a => a.Id == id);
 		}
 
-        public async Task<Style> FindStyle(int id)
+        public async Task<Style> FindStyle(int id)//!!!
         {
             return await _context.Styles.FirstOrDefaultAsync(a => a.Id == id);
         }
