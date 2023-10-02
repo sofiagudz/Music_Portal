@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Music_Portal.Filters;
 using Music_Portal.Models;
@@ -19,11 +20,37 @@ namespace Music_Portal.Controllers
             _appEnvironment = appEnvironment;
         }
 
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(SortState sortOrder = SortState.NameAsc, int page = 1)
         {
-            return await repo.SongsToList() != null ?
-                View(await repo.SongsToListIEnumerable()) :
-                Problem("Entity set 'Music_PortalContext.Songs' is null");
+            IEnumerable<Song> songs = await repo.SongsToList();
+
+            songs = sortOrder switch
+            {
+                SortState.NameDesc => songs.OrderByDescending(s => s.Name),
+                SortState.YearAsc => songs.OrderBy(s => s.ReleaseYear),
+                SortState.YearDesc => songs.OrderByDescending(s => s.ReleaseYear),
+                SortState.AlbumAsc => songs.OrderBy(s => s.Album),
+                SortState.AlbumDesc => songs.OrderByDescending(s => s.Album),
+                SortState.SingerAsc => songs.OrderBy(s => s.Singer.Name),
+                SortState.SingerDesc => songs.OrderByDescending(s => s.Singer.Name),
+                SortState.StyleAsc => songs.OrderBy(s => s.Style.Name),
+                SortState.StyleDesc => songs.OrderByDescending(s => s.Style.Name),
+                _ => songs.OrderBy(s => s.Name),
+            };
+            int pageSize = 3;
+            var count = songs.Count();
+            var items = songs.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            IndexViewModelSong viewModel = new IndexViewModelSong(
+                items,
+                new PageViewModelSong(count, page, pageSize),
+                new SortViewModelSong(sortOrder)
+                );
+
+            return View(viewModel);
+            //return await repo.SongsToList() != null ?
+            //    View(await repo.SongsToListIEnumerable()) :
+            //    Problem("Entity set 'Music_PortalContext.Songs' is null");
         }
 
         public ActionResult Registration()
@@ -300,11 +327,38 @@ namespace Music_Portal.Controllers
         }
 
         //все участиники
-		public async Task<ActionResult> UsersList()
+		public async Task<ActionResult> UsersList(SortStateUser sortOrder = SortStateUser.NameAsc, int page = 1)
 		{
-            return await repo.UsersToList() != null ?
-                View(await repo.UsersToListIEnumerable()) :
-                Problem("Entity set 'Music_PortalContext.Users' is null");
+            IEnumerable<User> users = await repo.UsersToList();
+
+            users = sortOrder switch
+            {
+                SortStateUser.NameDesc => users.OrderByDescending(s => s.Name),
+                SortStateUser.SurnameAsc => users.OrderBy(s => s.Surname),
+                SortStateUser.SurnameDesc => users.OrderByDescending(s => s.Surname),
+				SortStateUser.LoginAsc => users.OrderBy(s => s.Login),
+				SortStateUser.LoginDesc => users.OrderByDescending(s => s.Login),
+				SortStateUser.EmailAsc => users.OrderBy(s => s.Email),
+				SortStateUser.EmailDesc => users.OrderByDescending(s => s.Email),
+				SortStateUser.AccessLevelAsc => users.OrderBy(s => s.AccessLevel),
+				SortStateUser.AccessLevelDesc => users.OrderByDescending(s => s.AccessLevel),
+                _ => users.OrderBy(s => s.Name),
+			};
+
+            int pageSize = 2;
+            var count = users.Count();
+            var items = users.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            IndexViewModelUser viewModel = new IndexViewModelUser(
+                items,
+                new PageViewModelUser(count, page, pageSize),
+                new SortViewModelUser(sortOrder)
+                );
+
+            return View(viewModel);
+			//return await repo.UsersToList() != null ?
+   //             View(await repo.UsersToListIEnumerable()) :
+   //             Problem("Entity set 'Music_PortalContext.Users' is null");
 		}
 
         public ActionResult ChangeCulture(string lang)

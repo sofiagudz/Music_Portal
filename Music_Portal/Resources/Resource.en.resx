@@ -147,6 +147,9 @@
   <data name="AllUsers" xml:space="preserve">
     <value>All users</value>
   </data>
+  <data name="Back" xml:space="preserve">
+    <value>Back</value>
+  </data>
   <data name="BackToList" xml:space="preserve">
     <value>BACK TO LIST</value>
   </data>
@@ -210,6 +213,9 @@
   <data name="Exit" xml:space="preserve">
     <value>Log out</value>
   </data>
+  <data name="Forward" xml:space="preserve">
+    <value>Forward</value>
+  </data>
   <data name="Lgn" xml:space="preserve">
     <value>Login</value>
   </data>
@@ -224,6 +230,9 @@
   </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
+  </data>
+  <data name="PasswordsDontMatch" xml:space="preserve">
+    <value>Passwords don't match!</value>
   </data>
   <data name="Published" xml:space="preserve">
     <value>Published</value>
@@ -251,6 +260,9 @@
   </data>
   <data name="SongsToList" xml:space="preserve">
     <value>The list of songs</value>
+  </data>
+  <data name="SortBy" xml:space="preserve">
+    <value>Sort by</value>
   </data>
   <data name="Style" xml:space="preserve">
     <value>Style</value>

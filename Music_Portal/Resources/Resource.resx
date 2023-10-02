@@ -147,6 +147,9 @@
   <data name="AllUsers" xml:space="preserve">
     <value>Все участники</value>
   </data>
+  <data name="Back" xml:space="preserve">
+    <value>Назад</value>
+  </data>
   <data name="BackToList" xml:space="preserve">
     <value>НАЗАД К СПИСКУ</value>
   </data>
@@ -210,6 +213,9 @@
   <data name="Exit" xml:space="preserve">
     <value>Выход</value>
   </data>
+  <data name="Forward" xml:space="preserve">
+    <value>Вперед</value>
+  </data>
   <data name="Lgn" xml:space="preserve">
     <value>Логин</value>
   </data>
@@ -224,6 +230,9 @@
   </data>
   <data name="Password" xml:space="preserve">
     <value>Пароль</value>
+  </data>
+  <data name="PasswordsDontMatch" xml:space="preserve">
+    <value>Пароли не совпадают!</value>
   </data>
   <data name="Published" xml:space="preserve">
     <value>Разместил</value>
@@ -251,6 +260,9 @@
   </data>
   <data name="SongsToList" xml:space="preserve">
     <value>Список песен</value>
+  </data>
+  <data name="SortBy" xml:space="preserve">
+    <value>Сортировать по</value>
   </data>
   <data name="Style" xml:space="preserve">
     <value>Стиль</value>

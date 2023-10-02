@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Music_Portal.Models;
 using Music_Portal.Repository;
@@ -220,18 +221,52 @@ namespace Music_Portal.Controllers
             return (list?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
-        public async Task<ActionResult> StylesToList()
+        public async Task<ActionResult> StylesToList(SortStateStyle sortOrder = SortStateStyle.NameAsc, int page = 1)
         {
-            return await repo.StylesToList() != null ?
-                View(await repo.StylesToListIEnumerable()) :
-                Problem("Entity set 'Music_PortalContext.Styles' is null");
+			IEnumerable<Style> styles = await repo.StylesToList();
+
+            styles = sortOrder switch
+            {
+                SortStateStyle.NameDesc => styles.OrderByDescending(s => s.Name),
+                _ => styles.OrderBy(s => s.Name)
+            };
+            int pageSize = 2;
+            var count = styles.Count();
+            var items = styles.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            IndexViewModelStyle viewModel = new IndexViewModelStyle(
+                items,
+                new PageViewModelStyle(count, page, pageSize),
+                new SortViewModelStyle(sortOrder)
+                );
+            return View(viewModel);
+			//return await repo.StylesToList() != null ?
+   //             View(await repo.StylesToListIEnumerable()) :
+   //             Problem("Entity set 'Music_PortalContext.Styles' is null");
         }
 
-        public async Task<ActionResult> SingersToList()
+        public async Task<ActionResult> SingersToList(SortStateSinger sortOrder = SortStateSinger.NameAsc, int page = 1)
         {
-            return await repo.SingersToList() != null ?
-                View(await repo.SingersToListIEnumerable()) :
-                Problem("Entity set 'Music_PortalContext.Singers' is null");
+			IEnumerable<Singer> singers = await repo.SingersToList();
+
+			singers = sortOrder switch
+			{
+				SortStateSinger.NameDesc => singers.OrderByDescending(s => s.Name),
+				_ => singers.OrderBy(s => s.Name)
+			};
+			int pageSize = 2;
+			var count = singers.Count();
+			var items = singers.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+			IndexViewModelSinger viewModel = new IndexViewModelSinger(
+				items,
+				new PageViewModelSinger(count, page, pageSize),
+				new SortViewModelSinger(sortOrder)
+				);
+			return View(viewModel);
+			//return await repo.SingersToList() != null ?
+   //             View(await repo.SingersToListIEnumerable()) :
+   //             Problem("Entity set 'Music_PortalContext.Singers' is null");
         }
     }
 }

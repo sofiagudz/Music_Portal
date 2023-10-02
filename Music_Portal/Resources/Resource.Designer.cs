@@ -151,6 +151,15 @@ namespace Music_Portal.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Назад.
+        /// </summary>
+        public static string Back {
+            get {
+                return ResourceManager.GetString("Back", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to НАЗАД К СПИСКУ.
         /// </summary>
         public static string BackToList {
@@ -340,6 +349,15 @@ namespace Music_Portal.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Вперед.
+        /// </summary>
+        public static string Forward {
+            get {
+                return ResourceManager.GetString("Forward", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Логин.
         /// </summary>
         public static string Lgn {
@@ -381,6 +399,15 @@ namespace Music_Portal.Resources {
         public static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Пароли не совпадают!.
+        /// </summary>
+        public static string PasswordsDontMatch {
+            get {
+                return ResourceManager.GetString("PasswordsDontMatch", resourceCulture);
             }
         }
         
@@ -462,6 +489,15 @@ namespace Music_Portal.Resources {
         public static string SongsToList {
             get {
                 return ResourceManager.GetString("SongsToList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Сортировать по.
+        /// </summary>
+        public static string SortBy {
+            get {
+                return ResourceManager.GetString("SortBy", resourceCulture);
             }
         }
         

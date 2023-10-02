@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Music_Portal.Models.User>
+﻿@model Music_Portal.Models.IndexViewModelUser
 
 @{
 	ViewBag.Title = @Music_Portal.Resources.Resource.UsersList;
@@ -6,32 +6,32 @@
 }
 <p class="font" style="font-size: 32px; padding-top: 33px;">@Music_Portal.Resources.Resource.UsersList</p>
 <br />
-<div style="background-color: #374566; box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1), 0.3em 0.3em 1em black; border-radius: 15px;">
+	<div style="background-color: #374566; box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1), 0.3em 0.3em 1em black; border-radius: 15px;">
 	<br />
 	<table class="table" >
 		<thead style="margin-top: 20px">
 			<tr>
 				<th style="color: white" class="font">
-					@Html.DisplayNameFor(model=>model.Name)
+					<a asp-action="UsersList"  asp-route-sortOrder="@(Model.SortViewModel.NameSort)">@Music_Portal.Resources.Resource.Name</a>
 				</th>
 				<th style="color: white" class="font">
-				    @Html.DisplayNameFor(model=>model.Surname)
+					<a asp-action="UsersList"  asp-route-sortOrder="@(Model.SortViewModel.SurnameSort)">@Music_Portal.Resources.Resource.Surname</a>
 				</th>
 				<th style="color: white" class="font">
-				    @Html.DisplayNameFor(model=>model.Login)
+					<a asp-action="UsersList"  asp-route-sortOrder="@(Model.SortViewModel.LoginSort)">@Music_Portal.Resources.Resource.Login</a>
 				</th>
 				<th style="color: white" class="font">
-				    @Html.DisplayNameFor(model=>model.Email)
+					<a asp-action="UsersList"  asp-route-sortOrder="@(Model.SortViewModel.EmailSort)">@Music_Portal.Resources.Resource.Email</a>
 				</th>
 				<th style="color: white" class="font">
-				    @Html.DisplayNameFor(model=>model.AccessLevel)
+				   <a asp-action="UsersList"  asp-route-sortOrder="@(Model.SortViewModel.AccessLevelSort)">@Music_Portal.Resources.Resource.AccessLevel</a>
 				</th>
 			</tr>
 		</thead>
 		<tbody sty>
 		@if (Model != null)
 		{
-			@foreach (var t in Model)
+			@foreach (var t in Model.Users)
 			{
 				<tr>
 					<td style="color: white" class="font">
@@ -50,8 +50,8 @@
 						@Html.DisplayFor(modelItem=>t.AccessLevel)
 					</td>
 					<td>
-						<a asp-action="Edit" asp-route-id="@t.Id">@Music_Portal.Resources.Resource.Edit</a>
-						<a asp-action="Delete" asp-route-id="@t.Id">@Music_Portal.Resources.Resource.Delete</a>
+						<a asp-action="Edit" asp-route-id="@t.Id" style="color: white">@Music_Portal.Resources.Resource.Edit</a>
+						<a asp-action="Delete" asp-route-id="@t.Id" style="color: white">@Music_Portal.Resources.Resource.Delete</a>
 					</td>
 				</tr>
 			}
@@ -60,3 +60,23 @@
 	</table>
 	<br />
 </div>
+<br />
+<p>
+	@if (Model.PageViewModel.HasPreviousPage)
+	{
+		<a asp-action="UsersList" asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+		asp-route-sortorder="@(Model.SortViewModel.Current)" 
+		class="glyphicon glyphicon-chevron-left">
+			@Music_Portal.Resources.Resource.Back
+	    </a>
+	}
+	@if (Model.PageViewModel.HasNextPage)
+	{
+		<a asp-action="UsersList" asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+		asp-route-sortorder="@(Model.SortViewModel.Current)" 
+		class="glyphicon glyphicon-chevron-right">
+			@Music_Portal.Resources.Resource.Forward
+	    </a>
+	}
+
+</p>

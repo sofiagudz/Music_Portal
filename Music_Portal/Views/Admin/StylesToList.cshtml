@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Music_Portal.Models.Style>
+﻿@model Music_Portal.Models.IndexViewModelStyle
 
 @{
     ViewBag.Title = @Music_Portal.Resources.Resource.Styles;
@@ -9,24 +9,27 @@
     <p class="font" style="font-size: 32px; padding-top: 33px;">@Music_Portal.Resources.Resource.Styles</p>
     <a asp-action="AddStyle">@Music_Portal.Resources.Resource.AddStyle</a>
     <br />
+    <br />
     <div style="background-color: #374566; box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1), 0.3em 0.3em 1em black; border-radius: 15px;">
     <br />
         <table class="table">
         <thead>
             <tr>
-                <th style="color: white" class="font">@Html.DisplayNameFor(model=>model.Name)</th>
+                <th>
+                    <a asp-action="StylesToList"  asp-route-sortOrder="@(Model.SortViewModel.NameSort)" class="font" style="color: white">@Music_Portal.Resources.Resource.Name</a>
+                </th>
             </tr>
         </thead>
         <tbody>
             @if (Model != null)
             {
-                @foreach (var t in Model)
+                @foreach (var t in Model.Styles)
                 {
                     <tr>
                         <td style="color: white" class="font">@Html.DisplayFor(modelItem=>t.Name)</td>
                         <td>
-                            <a asp-action="EditStyle" asp-route-id="@t.Id">@Music_Portal.Resources.Resource.Edit</a>
-                            <a asp-action="DeleteStyle" asp-route-id="@t.Id">@Music_Portal.Resources.Resource.Delete</a>
+                            <a asp-action="EditStyle" asp-route-id="@t.Id" style="color: white">@Music_Portal.Resources.Resource.Edit</a>
+                            <a asp-action="DeleteStyle" asp-route-id="@t.Id" style="color: white">@Music_Portal.Resources.Resource.Delete</a>
                         </td>
                     </tr> 
                 }
@@ -36,3 +39,23 @@
     <br />
     </div>
 </div>
+<br />
+<p>
+	@if (Model.PageViewModel.HasPreviousPage)
+	{
+		<a asp-action="StylesToList" asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+		asp-route-sortorder="@(Model.SortViewModel.Current)" 
+		class="glyphicon glyphicon-chevron-left">
+			@Music_Portal.Resources.Resource.Back
+	    </a>
+	}
+	@if (Model.PageViewModel.HasNextPage)
+	{
+		<a asp-action="StylesToList" asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+		asp-route-sortorder="@(Model.SortViewModel.Current)" 
+		class="glyphicon glyphicon-chevron-right">
+			@Music_Portal.Resources.Resource.Forward
+	    </a>
+	}
+
+</p>

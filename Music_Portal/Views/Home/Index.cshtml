@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Music_Portal.Models.Song>
+﻿@model Music_Portal.Models.IndexViewModelSong
 
 @{
 	ViewBag.Title = @Music_Portal.Resources.Resource.SongsToList;
@@ -7,7 +7,40 @@
 
 @if (Model != null)
 {
-	@foreach (var t in Model)
+	
+	<table>
+		<tr>
+			<p class="font" style="font-size: 24px">@Music_Portal.Resources.Resource.SortBy</p>
+		</tr>
+		<tr>
+			<td>
+				<div style="margin-right: 10px; font-size: 22px;">
+				<a asp-action="Index"  asp-route-sortOrder="@(Model.SortViewModel.NameSort)" class="font" style="color: black">@Music_Portal.Resources.Resource.Name</a>
+				</div>
+			</td>
+			<td>
+				<div style="margin-right: 10px; font-size: 22px;">
+				<a asp-action="Index"  asp-route-sortOrder="@(Model.SortViewModel.SingerSort)" class="font" style="color: black">@Music_Portal.Resources.Resource.Singer</a>
+				</div>
+			</td>
+			<td>
+				<div style="margin-right: 10px; font-size: 22px;">
+				<a asp-action="Index"  asp-route-sortOrder="@(Model.SortViewModel.StyleSort)" class="font" style="color: black">@Music_Portal.Resources.Resource.Style</a>
+				</div>
+			</td>
+			<td>
+				<div style="margin-right: 10px; font-size: 22px;">
+				<a asp-action="Index"  asp-route-sortOrder="@(Model.SortViewModel.AlbumSort)" class="font" style="color: black">@Music_Portal.Resources.Resource.Album</a>
+				</div>
+			</td>
+			<td>
+				<div style="margin-right: 10px; font-size: 22px;">
+				<a asp-action="Index"  asp-route-sortOrder="@(Model.SortViewModel.YearSort)" class="font" style="color: black">@Music_Portal.Resources.Resource.Year</a>
+				</div>
+			</td>
+		</tr>
+	</table>
+	@foreach (var t in Model.Songs)
 	{
 		<div style="background-color:#374566; border-radius: 15px; box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1),
     0.3em 0.3em 1em black;">
@@ -50,3 +83,23 @@
 		<br />
 	}
 }
+<br />
+<p>
+	@if (Model.PageViewModel.HasPreviousPage)
+	{
+		<a asp-action="Index" asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+		asp-route-sortorder="@(Model.SortViewModel.Current)" 
+		class="glyphicon glyphicon-chevron-left">
+			@Music_Portal.Resources.Resource.Back
+	    </a>
+	}
+	@if (Model.PageViewModel.HasNextPage)
+	{
+		<a asp-action="Index" asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+		asp-route-sortorder="@(Model.SortViewModel.Current)" 
+		class="glyphicon glyphicon-chevron-right">
+			@Music_Portal.Resources.Resource.Forward
+	    </a>
+	}
+
+</p>
